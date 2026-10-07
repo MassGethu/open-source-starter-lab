@@ -18,6 +18,7 @@ import { streak } from "./plugins/streak.js";
 import { timeline } from "./plugins/timeline.js";
 import { welcome } from "./plugins/welcome.js";
 import { weeklySummary } from "./plugins/weeklySummary.js";
+import { labelStats } from "./plugins/labelStats.js";
 
 function readFlag(name: string): string | undefined {
   const index = process.argv.indexOf(name);
@@ -83,9 +84,11 @@ function printIssueFit(): void {
     );
 
     console.log("Accepted Skills:");
-    console.log("  beginner, intermediate, advanced");
     console.log(
-      "  (examples: html-css, javascript, typescript, python, docs, testing, git)\n"
+      "  html-css, javascript, python, docs, testing, git"
+    );
+    console.log(
+      "  (aliases: html, css, js, ts, typescript, py, documentation, writing, test, github)\n"
     );
 
     console.log("Accepted Time Budgets:");
@@ -303,6 +306,11 @@ async function main(): Promise<void> {
     return;
   }
 
+  if (command === "label-stats") {
+    labelStats();
+    return;
+  }
+
   if (
     command === "help" ||
     command === "--help" ||
@@ -348,6 +356,9 @@ async function main(): Promise<void> {
     );
     console.log(
       "  oss-lab welcome --contributor <name> --issue <issue>"
+    );
+    console.log(
+      "  oss-lab label-stats"
     );
 
     return;
